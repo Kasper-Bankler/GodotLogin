@@ -22,19 +22,11 @@ margin_bottom = 405.0
 theme = ExtResource( 2 )
 text = "Select"
 
-[node name="ButtonUpdate" type="Button" parent="."]
-margin_left = 163.0
-margin_top = 425.0
-margin_right = 221.0
-margin_bottom = 467.0
-theme = ExtResource( 2 )
-text = "Update"
-
 [node name="ButtonDelete" type="Button" parent="."]
 margin_left = 165.0
-margin_top = 484.0
+margin_top = 423.0
 margin_right = 222.0
-margin_bottom = 526.0
+margin_bottom = 465.0
 theme = ExtResource( 2 )
 text = "Delete"
 
@@ -108,5 +100,4 @@ valign = 1
 
 [connection signal="pressed" from="ButtonInsert" to="." method="_on_ButtonInsert_pressed"]
 [connection signal="pressed" from="ButtonSelect" to="." method="_on_ButtonSelect_pressed"]
-[connection signal="pressed" from="ButtonUpdate" to="." method="_on_ButtonUpdate_pressed"]
 [connection signal="pressed" from="ButtonDelete" to="." method="_on_ButtonDelete_pressed"]

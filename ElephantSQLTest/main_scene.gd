@@ -6,7 +6,7 @@ onready var show_data = $ShowData
 
 const USER = "fpfocwja"
 const PASSWORD = "qJdztZ36Nw9EHdM-_QGOLfyBPcn0mJAI"
-const HOST = "snuffleupagus.db.elephantsql.com"
+const HOST = "cornelius.db.elephantsql.com"
 const PORT = 5432 # Default postgres port
 const DATABASE = "fpfocwja" # Database name
 
@@ -48,16 +48,13 @@ func _execAll():
 			_execInsert()
 		sql_types.SELECT:
 			_execSelect()
-		sql_types.UPDATE:
-			_execUpdate()
 		sql_types.DELETE:
 			_execDelete()
-			
 
 #Insert, Select, Update & Delete : setup data & SQL
 func _execInsert():
 	var data = [[str($Username.get_text()), $Password.get_text()], $Mail.get_text()]
-	insertToDB("BEGIN; INSERT INTO users (Username, Email, Password) VALUES ('%s',%s,%s); COMMIT;", data)
+	insertToDB("BEGIN; INSERT INTO users (Username, Email, Password) VALUES ('%s','%s','%s'); COMMIT;", data)
 	_on_ButtonSelect_pressed()
 
 func _execSelect():
@@ -72,11 +69,6 @@ func _execSelect():
 		return_data += "\n"
 		
 	show_data.set_text(return_data)
-
-func _execUpdate():
-	var data = [[str($Username.get_text()), $Password.get_text(), $Mail.get_text(),$ID.get_text()]]
-	updateToDB("BEGIN; UPDATE users SET Username = '%s', Password = %s, Email = %s WHERE id = %s; COMMIT;", data)
-	_on_ButtonSelect_pressed()
 	
 func _execDelete():
 	var data = [[$ID.get_text()]]
@@ -104,16 +96,6 @@ func selectFromDB(sql:String) -> Array:
 	
 	return rows
 
-func updateToDB(sql: String, data: Array):
-	var _sql
-	
-	for d in data:
-		_sql = sql % d
-		database.execute(_sql)
-		print(_sql)
-
-	database.close()
-
 func deleteFromDB(sql: String, data: Array):
 	#var datas
 	var _sql
@@ -133,10 +115,6 @@ func _on_ButtonInsert_pressed():
 
 func _on_ButtonSelect_pressed():
 	sql_type = sql_types.SELECT
-	connectDB()
-
-func _on_ButtonUpdate_pressed():
-	sql_type = sql_types.UPDATE
 	connectDB()
 
 func _on_ButtonDelete_pressed():
