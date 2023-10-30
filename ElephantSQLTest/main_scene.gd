@@ -57,7 +57,7 @@ func _execAll():
 #Insert, Select, Update & Delete : setup data & SQL
 func _execInsert():
 	var data = [[str($Username.get_text()), $Password.get_text()], $Mail.get_text()]
-	insertToDB("BEGIN; INSERT INTO users (Username, Password, Mail) VALUES ('%s',%s,%s); COMMIT;", data)
+	insertToDB("BEGIN; INSERT INTO users (Username, Email, Password) VALUES ('%s',%s,%s); COMMIT;", data)
 	_on_ButtonSelect_pressed()
 
 func _execSelect():
@@ -75,7 +75,7 @@ func _execSelect():
 
 func _execUpdate():
 	var data = [[str($Username.get_text()), $Password.get_text(), $Mail.get_text(),$ID.get_text()]]
-	updateToDB("BEGIN; UPDATE users SET Username = '%s', Password = %s, Mail = %s WHERE id = %s; COMMIT;", data)
+	updateToDB("BEGIN; UPDATE users SET Username = '%s', Password = %s, Email = %s WHERE id = %s; COMMIT;", data)
 	_on_ButtonSelect_pressed()
 	
 func _execDelete():
