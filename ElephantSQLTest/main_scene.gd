@@ -50,6 +50,8 @@ func _execAll():
 			_execSelect()
 		sql_types.DELETE:
 			_execDelete()
+		sql_types.UPDATE:
+			_execUpdate()
 
 #Insert, Select, Update & Delete : setup data & SQL
 func _execInsert():
@@ -72,9 +74,13 @@ func _execSelect():
 	
 func _execDelete():
 	var data = [[$ID.get_text()]]
-	deleteFromDB("BEGIN; DELETE FROM users WHERE id = %s; COMMIT;", data)
+	deleteFromDB("BEGIN; DELETE FROM users WHERE UserID = %s; COMMIT;", data)
 	_on_ButtonSelect_pressed()
 
+func _execUpdate():
+	var data = [[str($Username.get_text()), $Password.get_text(), $Mail.get_text(),$ID.get_text()]]
+	updateToDB("BEGIN; UPDATE users SET Username = '%s', Password = '%s', Email = '%s' WHERE UserID = %s; COMMIT;", data)
+	_on_ButtonSelect_pressed()
 
 #Insert, Select, Update & Delete executes
 func insertToDB(sql: String, data: Array):
@@ -106,6 +112,16 @@ func deleteFromDB(sql: String, data: Array):
 		print(_sql)
 
 	database.close()
+	
+func updateToDB(sql: String, data: Array):
+	var _sql
+
+	for d in data:
+		_sql = sql % d
+		database.execute(_sql)
+		print(_sql)
+
+	database.close()
 
 
 #Button event handlers
@@ -120,3 +136,8 @@ func _on_ButtonSelect_pressed():
 func _on_ButtonDelete_pressed():
 	sql_type = sql_types.DELETE
 	connectDB()
+	
+func _on_ButtonUpdate_pressed():
+	sql_type = sql_types.UPDATE
+	connectDB()
+
