@@ -56,13 +56,13 @@ func _execAll():
 
 #Insert, Select, Update & Delete : setup data & SQL
 func _execInsert():
-	var data = [[str($PlayerName.get_text()), $Score.get_text()]]
-	insertToDB("BEGIN; INSERT INTO players (player_name, score) VALUES ('%s',%s); COMMIT;", data)
+	var data = [[str($Username.get_text()), $Password.get_text()], $Mail.get_text()]
+	insertToDB("BEGIN; INSERT INTO users (Username, Password, Mail) VALUES ('%s',%s,%s); COMMIT;", data)
 	_on_ButtonSelect_pressed()
 
 func _execSelect():
 	
-	var data = selectFromDB("BEGIN; SELECT * FROM players; COMMIT;")
+	var data = selectFromDB("BEGIN; SELECT * FROM users; COMMIT;")
 	var return_data = ""
 	
 	for d in data:
@@ -74,13 +74,13 @@ func _execSelect():
 	show_data.set_text(return_data)
 
 func _execUpdate():
-	var data = [[str($PlayerName.get_text()), $Score.get_text(), $IDPlayer.get_text()]]
-	updateToDB("BEGIN; UPDATE players SET player_name = '%s', score = %s WHERE id = %s; COMMIT;", data)
+	var data = [[str($Username.get_text()), $Password.get_text(), $Mail.get_text(),$ID.get_text()]]
+	updateToDB("BEGIN; UPDATE users SET Username = '%s', Password = %s, Mail = %s WHERE id = %s; COMMIT;", data)
 	_on_ButtonSelect_pressed()
 	
 func _execDelete():
-	var data = [[$IDPlayer.get_text()]]
-	deleteFromDB("BEGIN; DELETE FROM players WHERE id = %s; COMMIT;", data)
+	var data = [[$ID.get_text()]]
+	deleteFromDB("BEGIN; DELETE FROM users WHERE id = %s; COMMIT;", data)
 	_on_ButtonSelect_pressed()
 
 

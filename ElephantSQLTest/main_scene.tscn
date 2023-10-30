@@ -39,46 +39,62 @@ margin_top = 77.0
 margin_right = 849.0
 margin_bottom = 259.0
 
-[node name="IDPlayer" type="LineEdit" parent="."]
+[node name="Username" type="LineEdit" parent="."]
 margin_left = 554.0
 margin_top = 301.0
 margin_right = 808.0
 margin_bottom = 351.0
 
-[node name="PlayerName" type="LineEdit" parent="."]
+[node name="Password" type="LineEdit" parent="."]
 margin_left = 553.0
 margin_top = 380.0
 margin_right = 807.0
 margin_bottom = 430.0
 
-[node name="Score" type="LineEdit" parent="."]
+[node name="Mail" type="LineEdit" parent="."]
 margin_left = 552.0
 margin_top = 462.0
 margin_right = 806.0
 margin_bottom = 512.0
 
-[node name="LabelID" type="Label" parent="."]
+[node name="ID" type="LineEdit" parent="."]
+margin_left = 554.0
+margin_top = 527.0
+margin_right = 808.0
+margin_bottom = 577.0
+
+[node name="UsernameLabel" type="Label" parent="."]
 margin_left = 435.0
 margin_top = 303.0
 margin_right = 521.0
 margin_bottom = 345.0
-text = "ID"
+text = "Username"
 valign = 1
 
-[node name="LabelName" type="Label" parent="."]
+[node name="PasswordLabel" type="Label" parent="."]
 margin_left = 434.0
 margin_top = 381.0
 margin_right = 518.0
 margin_bottom = 423.0
-text = "Player name"
+text = "Password"
 valign = 1
 
-[node name="LabelScore" type="Label" parent="."]
+[node name="MailLabel" type="Label" parent="."]
 margin_left = 431.0
 margin_top = 463.0
 margin_right = 494.0
 margin_bottom = 507.0
-text = "Score"
+rect_pivot_offset = Vector2( -341, 49 )
+text = "Mail"
+valign = 1
+
+[node name="IDLabel" type="Label" parent="."]
+margin_left = 430.0
+margin_top = 526.0
+margin_right = 493.0
+margin_bottom = 570.0
+rect_pivot_offset = Vector2( -341, 49 )
+text = "ID"
 valign = 1
 
 [connection signal="pressed" from="ButtonInsert" to="." method="_on_ButtonInsert_pressed"]
