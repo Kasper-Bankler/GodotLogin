@@ -1,6 +1,7 @@
 extends Node2D
 
 var database := PostgreSQLClient.new()
+onready var show_data = $ShowData
 
 
 const USER = "fpfocwja"
@@ -56,11 +57,10 @@ func _execAll():
 func _execInsert():
 	var data = [str($Username.get_text()), $Password.get_text(), $Mail.get_text()]
 	insertToDB("BEGIN; INSERT INTO users (\"Username\", \"Email\", \"Password\") VALUES ('%s','%s','%s'); COMMIT;", data)
-	_on_ButtonSelect_pressed()
-
+	get_tree().change_scene("res://loginpage.tscn")
 func _execSelect():
-	var query="BEGIN; SELECT * FROM users WHERE \"Username\"='%s' ; COMMIT;" % $Username.get_text()
-	var data = selectFromDB(query)
+	
+	var data = selectFromDB("BEGIN; SELECT * FROM users; COMMIT;")
 	var return_data = ""
 	
 	for d in data:
@@ -68,7 +68,8 @@ func _execSelect():
 			return_data += str(d[n]) + "\t"
 			print(d[n])
 		return_data += "\n"
-
+		
+	show_data.set_text(return_data)
 	
 func _execDelete():
 	var data = [[$ID.get_text()]]
@@ -122,9 +123,7 @@ func updateToDB(sql: String, data: Array):
 
 
 #Button event handlers
-func _on_ButtonInsert_pressed():
-	sql_type = sql_types.INSERT
-	connectDB()
+	
 
 func _on_ButtonSelect_pressed():
 	sql_type = sql_types.SELECT
@@ -138,3 +137,10 @@ func _on_ButtonUpdate_pressed():
 	sql_type = sql_types.UPDATE
 	connectDB()
 
+func _on_singup_pressed():
+	sql_type = sql_types.INSERT
+	connectDB()
+
+
+func _on_login_pressed():
+	pass # Replace with function body.
