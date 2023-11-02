@@ -1,7 +1,7 @@
 extends Node2D
 
 var database := PostgreSQLClient.new()
-onready var show_data = $ShowData
+
 
 
 const USER = "fpfocwja"
@@ -21,6 +21,7 @@ var sql_type = -1
 
 
 func connectDB():
+
 	var _error := database.connect("connection_established", self, "_execAll")
 	_error = database.connect("authentication_error", self, "_authentication_error")
 	_error = database.connect("connection_closed", self, "_close")	
@@ -58,18 +59,18 @@ func _execInsert():
 	var data = [str($Username.get_text()), $Password.get_text(), $Mail.get_text()]
 	insertToDB("BEGIN; INSERT INTO users (\"Username\", \"Email\", \"Password\") VALUES ('%s','%s','%s'); COMMIT;", data)
 	get_tree().change_scene("res://loginpage.tscn")
+	
 func _execSelect():
-	
-	var data = selectFromDB("BEGIN; SELECT * FROM users; COMMIT;")
+	var query="BEGIN; SELECT * FROM users WHERE \"Username\"='%s' ; COMMIT;" % $Username.get_text()
+	var data = selectFromDB(query)
 	var return_data = ""
-	
+	print("*********")
 	for d in data:
+		print(d)
 		for n in d.size():
 			return_data += str(d[n]) + "\t"
-			print(d[n])
 		return_data += "\n"
-		
-	show_data.set_text(return_data)
+	print("*********")
 	
 func _execDelete():
 	var data = [[$ID.get_text()]]
@@ -143,4 +144,9 @@ func _on_singup_pressed():
 
 
 func _on_login_pressed():
-	pass # Replace with function body.
+	sql_type = sql_types.SELECT
+	connectDB()
+
+
+func _on_login2_pressed():
+	get_tree().change_scene("res://choice_scene.tscn")

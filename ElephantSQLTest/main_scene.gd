@@ -59,15 +59,18 @@ func _execInsert():
 	_on_ButtonSelect_pressed()
 
 func _execSelect():
-	var query="BEGIN; SELECT * FROM users WHERE \"Username\"='%s' ; COMMIT;" % $Username.get_text()
-	var data = selectFromDB(query)
-	var return_data = ""
 	
+	var data = selectFromDB("BEGIN; SELECT * FROM users; COMMIT;")
+	var return_data = ""
+	print("*******")
 	for d in data:
+		print(d)
 		for n in d.size():
 			return_data += str(d[n]) + "\t"
-			print(d[n])
 		return_data += "\n"
+	print("*******")
+#	show_data.set_text(return_data)
+
 
 	
 func _execDelete():

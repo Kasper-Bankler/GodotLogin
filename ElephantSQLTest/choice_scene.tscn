@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://CHOICE.gd" type="Script" id=1]
+[ext_resource path="res://MinimalUI/MinimalUI.tres" type="Theme" id=2]
+
+[node name="login" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="login" type="Button" parent="."]
+margin_left = 437.0
+margin_top = 317.0
+margin_right = 509.0
+margin_bottom = 360.0
+rect_pivot_offset = Vector2( 35, -2 )
+theme = ExtResource( 2 )
+text = " LOG IN "
+
+[node name="list" type="Button" parent="."]
+margin_left = 373.0
+margin_top = 460.0
+margin_right = 574.0
+margin_bottom = 503.0
+rect_pivot_offset = Vector2( 35, -2 )
+theme = ExtResource( 2 )
+text = " VIEW LIST OF ALL PLAYERS"
+
+[node name="login2" type="Button" parent="."]
+margin_left = 437.0
+margin_top = 267.0
+margin_right = 502.0
+margin_bottom = 309.0
+theme = ExtResource( 2 )
+text = " SIGN UP "
+
+[connection signal="pressed" from="login" to="." method="_on_login_pressed"]
+[connection signal="pressed" from="list" to="." method="_on_list_pressed"]
+[connection signal="pressed" from="login2" to="." method="_on_login2_pressed"]

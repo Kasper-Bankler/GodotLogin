@@ -5,7 +5,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
-onready var main_scene=preload("res://choice_scene.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -16,5 +16,13 @@ func _ready():
 #	pass
 
 
-func _on_Button_pressed():
-	get_tree().change_scene_to(main_scene)
+func _on_login2_pressed():
+	get_tree().change_scene("res://signup.tscn")
+
+
+func _on_login_pressed():
+	get_tree().change_scene("res://login.tscn")
+
+
+func _on_list_pressed():
+	get_tree().change_scene("res://list.tscn")

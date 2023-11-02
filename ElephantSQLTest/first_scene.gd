@@ -138,5 +138,12 @@ func _on_ButtonUpdate_pressed():
 	connectDB()
 
 func _on_singup_pressed():
+	if ($Username.text=="" || $Password.text=="" || $Mail.text==""):
+		$AcceptDialog.show()
+		return
 	sql_type = sql_types.INSERT
 	connectDB()
+
+
+func _on_singup2_pressed():
+	get_tree().change_scene("res://choice_scene.tscn")

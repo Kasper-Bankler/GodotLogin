@@ -14,6 +14,14 @@ margin_bottom = 411.0
 theme = ExtResource( 2 )
 text = " LOG IN "
 
+[node name="login2" type="Button" parent="."]
+margin_left = 452.0
+margin_top = 416.0
+margin_right = 517.0
+margin_bottom = 458.0
+theme = ExtResource( 2 )
+text = "RETURN"
+
 [node name="Username" type="LineEdit" parent="."]
 margin_left = 352.0
 margin_top = 197.0
@@ -45,3 +53,4 @@ text = "Password"
 valign = 1
 
 [connection signal="pressed" from="login" to="." method="_on_login_pressed"]
+[connection signal="pressed" from="login2" to="." method="_on_login2_pressed"]
