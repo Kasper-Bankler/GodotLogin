@@ -59,19 +59,23 @@ func _execInsert():
 	var data = [str($Username.get_text()), $Password.get_text(), $Mail.get_text()]
 	insertToDB("BEGIN; INSERT INTO users (\"Username\", \"Email\", \"Password\") VALUES ('%s','%s','%s'); COMMIT;", data)
 	get_tree().change_scene("res://loginpage.tscn")
-	
+
+
+func alert_popup(text):
+	$AcceptDialog.dialog_text=text
+	$AcceptDialog.show()
+
 func _execSelect():
 	var query="BEGIN; SELECT * FROM users WHERE \"Username\"='%s' ; COMMIT;" % $Username.get_text()
 	var data = selectFromDB(query)
-	var return_data = ""
-	print("*********")
-	for d in data:
-		print(d)
-		for n in d.size():
-			return_data += str(d[n]) + "\t"
-		return_data += "\n"
-	print("*********")
-	
+	if (data.size()==0):
+		alert_popup("USER NOT FOUND")
+		return
+	if ($Password.text==data[0][2]):
+		get_tree().change_scene("res://loginpage.tscn")
+	else:
+		alert_popup("WRONG PASSWORD")
+
 func _execDelete():
 	var data = [[$ID.get_text()]]
 	deleteFromDB("BEGIN; DELETE FROM users WHERE UserID = %s; COMMIT;", data)

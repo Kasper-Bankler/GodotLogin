@@ -57,9 +57,9 @@ func _execSelect():
 	var return_data = ""
 	
 	for d in data:
+		print(d)
 		for n in d.size():
 			return_data += str(d[n]) + "\t"
-			print(d[n])
 		return_data += "\n"
 	$ShowData.text=return_data
 	$ButtonSelect.text=" RREFRESH "

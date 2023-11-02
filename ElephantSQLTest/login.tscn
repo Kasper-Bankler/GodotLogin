@@ -52,5 +52,13 @@ margin_bottom = 311.0
 text = "Password"
 valign = 1
 
+[node name="AcceptDialog" type="AcceptDialog" parent="."]
+visible = true
+margin_left = 379.0
+margin_top = 226.0
+margin_right = 554.0
+margin_bottom = 348.0
+dialog_text = "DONT LEAVE ANY FIELDS EMPTY"
+
 [connection signal="pressed" from="login" to="." method="_on_login_pressed"]
 [connection signal="pressed" from="login2" to="." method="_on_login2_pressed"]
